@@ -1,5 +1,5 @@
-- Losing Condition
 - Bugfix I Piece Start
 - More Stats
 - Visually better Looking line Clearing
 - Preview Set Piece?
+- Wall Rotate Collision Kick
