@@ -65,4 +65,17 @@ void Tetris::DrawBoundaries(void)
 	DrawLine(AppWidth - InfoRightWallBorderWidth, TopLayerHeight + TopLayerGameBorderHeight,
 			AppWidth - InfoRightWallBorderWidth, TopLayerHeight + TopLayerGameBorderHeight + GameHeight,
 			olc::WHITE);
+
+	for (int32_t index = 1; index < NumberTilesY; index++)
+	{
+		DrawLine(LeftWallGameBorderWidth, TopLayerHeight + TopLayerGameBorderHeight + TileSize * index,
+				LeftWallGameBorderWidth + GameWidth, TopLayerHeight + TopLayerGameBorderHeight + TileSize * index,
+				olc::WHITE);
+	}
+	for (int32_t index = 1; index < NumberTilesX; index++)
+	{
+		DrawLine(LeftWallGameBorderWidth + index * TileSize, TopLayerHeight + TopLayerGameBorderHeight,
+				LeftWallGameBorderWidth + index * TileSize, TopLayerHeight + TopLayerGameBorderHeight + GameHeight,
+				olc::WHITE);
+	}
 }
