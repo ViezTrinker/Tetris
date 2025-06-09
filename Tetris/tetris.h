@@ -41,6 +41,8 @@ private:
 	std::array<std::array<olc::Pixel, NumberTilesY>, NumberTilesX> _boardColors{};
 
 	uint32_t _points = 0;
+	static constexpr float _elapsedTimeThresholdDefault = 0.75;
+	float _elapsedTimeThreshold = _elapsedTimeThresholdDefault;
 };
 
 #endif //TETRIS_H

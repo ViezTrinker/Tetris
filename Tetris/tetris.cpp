@@ -33,7 +33,7 @@ bool Tetris::OnUserUpdate(float fElapsedTime)
 {
 	_elapsedTime += fElapsedTime;
 	Input();
-	if (!_pause && _elapsedTime > 0.75)
+	if (!_pause && _elapsedTime > _elapsedTimeThreshold)
 	{
 		Logic();
 		_elapsedTime = 0;
@@ -60,14 +60,12 @@ void Tetris::Input()
 		_tetromino.Rotate(_board);
 		return;
 	}
-	if (!_pause && GetKey(olc::Key::DOWN).bPressed)
+	if (!_pause && GetKey(olc::Key::DOWN).bHeld)
 	{
-		if (_tetromino.MoveDown(_board))
-		{
-			CollisionHandler();
-		}
+		_elapsedTimeThreshold = 0.1f;
 		return;
 	}
+	_elapsedTimeThreshold = _elapsedTimeThresholdDefault;
 	if (GetKey(olc::Key::SPACE).bPressed)
 	{
 		_pause = !_pause;
@@ -170,11 +168,10 @@ void Tetris::Draw(void)
 
 void Tetris::DrawPointString(void)
 {
-	std::string pointString = "Points: ";
-	pointString.append(std::to_string(_points));
+	std::string pointString = std::to_string(_points);
 	DrawString(AppWidth - InfoRightWallBorderWidth - InfoWidth + TileSize,
 				TopLayerHeight + TopLayerGameBorderHeight + TileSize,
-				pointString, olc::WHITE, 2);
+				pointString, olc::WHITE, 3);
 }
 
 void Tetris::DrawNextTetromino(void)

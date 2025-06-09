@@ -1,4 +1,5 @@
 - Losing Condition
 - Bugfix I Piece Start
 - More Stats
-- Visually better Looking line clearing
+- Visually better Looking line Clearing
+- Preview Set Piece?
