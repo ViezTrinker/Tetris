@@ -1,0 +1,4 @@
+- Losing Condition
+- Bugfix I Piece Start
+- More Stats
+- Visually better Looking line clearing
