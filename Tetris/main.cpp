@@ -2,7 +2,7 @@
 #include "tetris.h"
 
 int main()
-{
+{	
 	Tetris tetris;
 	if (tetris.Construct(AppWidth, AppHeight, PixelWidth, PixelHeight))
 	{

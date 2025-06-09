@@ -132,11 +132,15 @@
     <ClCompile Include="olcPixelGameEngine.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="tetris.cpp" />
+    <ClCompile Include="tetromino.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="config.h" />
     <ClInclude Include="olcPixelGameEngine.h" />
+    <ClInclude Include="shapes.h" />
     <ClInclude Include="tetris.h" />
+    <ClInclude Include="tetromino.h" />
+    <ClInclude Include="utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
