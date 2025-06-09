@@ -1,4 +1,3 @@
-- Bugfix I Piece Start
 - More Stats
 - Visually better Looking line Clearing
 - Preview Set Piece?

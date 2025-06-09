@@ -10,8 +10,8 @@ using ShapeType = std::array<std::array<std::array<bool, 4>, 4>, 4>;
 inline constexpr ShapeType ShapeI =
 { {
 	{{
-		{ 0, 0, 0, 0 },
 		{ 1, 1, 1, 1 },
+		{ 0, 0, 0, 0 },
 		{ 0, 0, 0, 0 },
 		{ 0, 0, 0, 0 }
 	}},
@@ -23,8 +23,8 @@ inline constexpr ShapeType ShapeI =
 	}},
 	{{
 		{ 0, 0, 0, 0 },
-		{ 0, 0, 0, 0,},
-		{ 1, 1, 1, 1 },
+		{ 1, 1, 1, 1,},
+		{ 0, 0, 0, 0 },
 		{ 0, 0, 0, 0 }
 	}},
 	{{
