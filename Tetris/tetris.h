@@ -29,6 +29,7 @@ private:
 	void CollisionHandler(void);
 	bool CheckLineClearing(void);
 	void LineClearingEvent(uint32_t row);
+	void CheckLosingCondition(void);
 
 	Tetromino _tetromino;
 	Tetromino _tetrominoNext;
@@ -36,6 +37,7 @@ private:
 	double _elapsedTime = 0.0;
 
 	bool _pause = true;
+	bool _gameLost = false;
 
 	std::array<std::array<bool, NumberTilesY>, NumberTilesX> _board{};
 	std::array<std::array<olc::Pixel, NumberTilesY>, NumberTilesX> _boardColors{};

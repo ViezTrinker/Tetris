@@ -32,8 +32,11 @@ bool Tetris::OnUserCreate(void)
 bool Tetris::OnUserUpdate(float fElapsedTime)
 {
 	_elapsedTime += fElapsedTime;
-	Input();
-	if (!_pause && _elapsedTime > _elapsedTimeThreshold)
+	if (!_gameLost)
+	{
+		Input();
+	}
+	if (!_gameLost && !_pause && _elapsedTime > _elapsedTimeThreshold)
 	{
 		Logic();
 		_elapsedTime = 0;
@@ -149,7 +152,20 @@ void Tetris::CollisionHandler(void)
 	}
 	Tetromino tetromino;
 	_tetromino = _tetrominoNext;
+	CheckLosingCondition();
+
 	_tetrominoNext = tetromino;
+}
+
+void Tetris::CheckLosingCondition(void)
+{
+	for (uint32_t index = 0; index < NumberBlockShape; index++)
+	{
+		if (_board[_tetromino.GetPositions().at(index).x][_tetromino.GetPositions().at(index).y])
+		{
+			_gameLost = true;
+		}
+	}
 }
 
 void Tetris::Draw(void)
