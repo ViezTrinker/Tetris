@@ -13,6 +13,7 @@ Tetris::Tetris(void)
 	Tetromino tetrominoNext;
 	_tetromino = tetromino;
 	_tetrominoNext = tetrominoNext;
+	IncrementTypeStats(_tetromino.GetType());
 
 	for (uint32_t indexX = 0; indexX < NumberTilesX; indexX++)
 	{
@@ -97,6 +98,11 @@ void Tetris::Logic(void)
 	if (linesCleared > 0)
 	{
 		_points += bonusPoints[linesCleared - 1];
+		_stats.lineClears += linesCleared;
+		if (linesCleared == 1) { _stats.lineClears1++; }
+		if (linesCleared == 2) { _stats.lineClears2++; }
+		if (linesCleared == 3) { _stats.lineClears3++; }
+		if (linesCleared == 4) { _stats.lineClears4++; }
 	}
 }
 
@@ -153,6 +159,7 @@ void Tetris::CollisionHandler(void)
 	Tetromino tetromino;
 	_tetromino = _tetrominoNext;
 	CheckLosingCondition();
+	IncrementTypeStats(_tetromino.GetType());
 
 	_tetrominoNext = tetromino;
 }
@@ -168,6 +175,36 @@ void Tetris::CheckLosingCondition(void)
 	}
 }
 
+void Tetris::IncrementTypeStats(Tetromino::Type type)
+{
+	switch (type)
+	{
+	case Tetromino::Type::I:
+		_stats.countI++;
+		break;
+	case Tetromino::Type::O:
+		_stats.countO++;
+		break;
+	case Tetromino::Type::T:
+		_stats.countT++;
+		break;
+	case Tetromino::Type::S:
+		_stats.countS++;
+		break;
+	case Tetromino::Type::Z:
+		_stats.countZ++;
+		break;
+	case Tetromino::Type::J:
+		_stats.countJ++;
+		break;
+	case Tetromino::Type::L:
+		_stats.countL++;
+		break;
+	default:
+		break;
+	}
+}
+
 void Tetris::Draw(void)
 {
 	// Erase previous frame
@@ -180,6 +217,7 @@ void Tetris::Draw(void)
 
 	_tetromino.Draw(this);
 	DrawNextTetromino();
+	DrawStats();
 }
 
 void Tetris::DrawPointString(void)
@@ -264,4 +302,69 @@ void Tetris::DrawBoard(void)
 			}
 		}
 	}
+}
+
+void Tetris::DrawStats(void)
+{
+	std::string clearString = "Line Clears";
+	DrawString(AppWidth - InfoRightWallBorderWidth - InfoWidth + TileSize,
+		TopLayerHeight + TopLayerGameBorderHeight + 9 * TileSize,
+		clearString, olc::WHITE, 1);
+
+	std::string lineClears = std::to_string(_stats.lineClears);
+	lineClears.append(" (");
+	lineClears.append(std::to_string(_stats.lineClears1));
+	lineClears.append(", ");
+	lineClears.append(std::to_string(_stats.lineClears2));
+	lineClears.append(", ");
+	lineClears.append(std::to_string(_stats.lineClears3));
+	lineClears.append(", ");
+	lineClears.append(std::to_string(_stats.lineClears4));
+	lineClears.append(")");
+	DrawString(AppWidth - InfoRightWallBorderWidth - InfoWidth + TileSize,
+		TopLayerHeight + TopLayerGameBorderHeight + 10 * TileSize,
+		lineClears, olc::WHITE, 1);
+
+	
+	std::string statString = "I: ";
+	statString.append(std::to_string(_stats.countI));
+	DrawString(AppWidth - InfoRightWallBorderWidth - InfoWidth + TileSize,
+		TopLayerHeight + TopLayerGameBorderHeight + 12 * TileSize,
+		statString, olc::WHITE, 2);
+
+	statString = "O: ";
+	statString.append(std::to_string(_stats.countO));
+	DrawString(AppWidth - InfoRightWallBorderWidth - InfoWidth + TileSize,
+		TopLayerHeight + TopLayerGameBorderHeight + 13 * TileSize,
+		statString, olc::WHITE, 2);
+
+	statString = "T: ";
+	statString.append(std::to_string(_stats.countT));
+	DrawString(AppWidth - InfoRightWallBorderWidth - InfoWidth + TileSize,
+		TopLayerHeight + TopLayerGameBorderHeight + 14 * TileSize,
+		statString, olc::WHITE, 2);
+
+	statString = "S: ";
+	statString.append(std::to_string(_stats.countS));
+	DrawString(AppWidth - InfoRightWallBorderWidth - InfoWidth + TileSize,
+		TopLayerHeight + TopLayerGameBorderHeight + 15 * TileSize,
+		statString, olc::WHITE, 2);
+
+	statString = "Z: ";
+	statString.append(std::to_string(_stats.countZ));
+	DrawString(AppWidth - InfoRightWallBorderWidth - InfoWidth + TileSize,
+		TopLayerHeight + TopLayerGameBorderHeight + 16 * TileSize,
+		statString, olc::WHITE, 2);
+
+	statString = "J: ";
+	statString.append(std::to_string(_stats.countJ));
+	DrawString(AppWidth - InfoRightWallBorderWidth - InfoWidth + TileSize,
+		TopLayerHeight + TopLayerGameBorderHeight + 17 * TileSize,
+		statString, olc::WHITE, 2);
+
+	statString = "L: ";
+	statString.append(std::to_string(_stats.countL));
+	DrawString(AppWidth - InfoRightWallBorderWidth - InfoWidth + TileSize,
+		TopLayerHeight + TopLayerGameBorderHeight + 18 * TileSize,
+		statString, olc::WHITE, 2);
 }

@@ -25,6 +25,7 @@ private:
 	void DrawPointString(void);
 	void DrawBoard(void);
 	void DrawNextTetromino(void);
+	void DrawStats(void);
 
 	void CollisionHandler(void);
 	bool CheckLineClearing(void);
@@ -45,6 +46,26 @@ private:
 	uint32_t _points = 0;
 	static constexpr float _elapsedTimeThresholdDefault = 0.75;
 	float _elapsedTimeThreshold = _elapsedTimeThresholdDefault;
+
+	struct Stats
+	{
+		uint32_t countI = 0;
+		uint32_t countO = 0;
+		uint32_t countT = 0;
+		uint32_t countS = 0;
+		uint32_t countZ = 0;
+		uint32_t countJ = 0;
+		uint32_t countL = 0;
+
+		uint32_t lineClears = 0;
+		uint32_t lineClears1 = 0;
+		uint32_t lineClears2 = 0;
+		uint32_t lineClears3 = 0;
+		uint32_t lineClears4 = 0;
+	};
+	Stats _stats{};
+
+	void IncrementTypeStats(Tetromino::Type type);
 };
 
 #endif //TETRIS_H

@@ -13,6 +13,11 @@ class Tetromino
 public:
 	Tetromino(void);
 
+	enum class Type
+	{
+		I = 0, O, T, S, Z, J, L, Undefined
+	};
+
 	void Draw(olc::PixelGameEngine* pge);
 	void DrawPreview(olc::PixelGameEngine* pge);
 
@@ -23,13 +28,9 @@ public:
 
 	std::array<PosI, 4> GetPositions(void) { return _property.position; }
 	olc::Pixel GetColor(void) { return _property.color; }
+	Type GetType(void) { return _property.type; }
 
 private:
-	enum class Type
-	{
-		I = 0, O, T, S, Z, J, L, Undefined
-	};
-
 	enum class Rotation
 	{
 		Spawn,
