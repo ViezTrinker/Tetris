@@ -23,7 +23,7 @@ Tetromino::Tetromino(void)
 		_property.shape = ShapeJ[static_cast<size_t>(Rotation::Spawn)];
 		break;
 	case Type::L:
-		_property.color = olc::VERY_DARK_YELLOW;
+		_property.color = olc::Pixel(255, 165, 0);
 		_property.shape = ShapeL[static_cast<size_t>(Rotation::Spawn)];
 		break;
 	case Type::O:
