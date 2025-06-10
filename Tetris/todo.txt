@@ -1,4 +1,3 @@
-- More Stats
 - Visually better Looking line Clearing
 - Preview Set Piece?
 - Wall Rotate Collision Kick
