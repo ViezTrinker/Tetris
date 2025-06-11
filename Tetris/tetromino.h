@@ -18,7 +18,7 @@ public:
 		I = 0, O, T, S, Z, J, L, Undefined
 	};
 
-	void Draw(olc::PixelGameEngine* pge);
+	void Draw(olc::PixelGameEngine* pge, std::array<std::array<bool, NumberTilesY>, NumberTilesX>& board);
 	void DrawPreview(olc::PixelGameEngine* pge);
 
 	bool MoveDown(std::array<std::array<bool, NumberTilesY>, NumberTilesX>& board);

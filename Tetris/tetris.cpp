@@ -215,7 +215,7 @@ void Tetris::Draw(void)
 	DrawTopLayerString();
 	DrawPointString();
 
-	_tetromino.Draw(this);
+	_tetromino.Draw(this, _board);
 	DrawNextTetromino();
 	DrawStats();
 }

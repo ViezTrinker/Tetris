@@ -200,7 +200,7 @@ void Tetromino::MoveRight(std::array<std::array<bool, NumberTilesY>, NumberTiles
 	_property.upperLeft.x += 1;
 }
 
-void Tetromino::Draw(olc::PixelGameEngine* pge)
+void Tetromino::Draw(olc::PixelGameEngine* pge, std::array<std::array<bool, NumberTilesY>, NumberTilesX>& board)
 {
 	for (uint32_t index = 0; index < NumberBlockShape; index++)
 	{
@@ -208,6 +208,48 @@ void Tetromino::Draw(olc::PixelGameEngine* pge)
 			_property.position[index].y * TileSize + TopLayerHeight + TopLayerGameBorderHeight,
 			TileSize, TileSize,
 			_property.color);
+
+	}
+
+	bool isColliding = false;
+	uint8_t yDown = 0;
+	while (!isColliding)
+	{
+		if (_property.position[0].y + yDown >= NumberTilesY || _property.position[1].y + yDown >= NumberTilesY ||
+			_property.position[2].y + yDown >= NumberTilesY || _property.position[3].y + yDown >= NumberTilesY)
+		{
+			break;
+		}
+		if (board[_property.position[0].x][_property.position[0].y + yDown] ||
+			board[_property.position[1].x][_property.position[1].y + yDown] ||
+			board[_property.position[2].x][_property.position[2].y + yDown] ||
+			board[_property.position[3].x][_property.position[3].y + yDown])
+		{
+			// Collision detected
+			isColliding = true;
+			yDown--;
+		}
+		if (_property.position[0].y + yDown == NumberTilesY - 1 || _property.position[1].y + yDown == NumberTilesY - 1 ||
+			_property.position[2].y + yDown == NumberTilesY - 1 || _property.position[3].y + yDown == NumberTilesY - 1)
+		{
+			// Collision detected
+			isColliding = true;
+		}
+		if (isColliding)
+		{
+			if (yDown != 0)
+			{
+				for (uint32_t index = 0; index < NumberBlockShape; index++)
+				{
+					pge->DrawRect(_property.position[index].x * TileSize + LeftWallGameBorderWidth,
+						(_property.position[index].y + yDown) * TileSize + TopLayerHeight + TopLayerGameBorderHeight,
+						TileSize, TileSize,
+						_property.color);
+
+				}
+			}
+		}
+		yDown++;
 	}
 }
 
